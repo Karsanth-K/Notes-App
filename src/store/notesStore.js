@@ -3,8 +3,6 @@ import { ref } from 'vue'
 import { db } from '@/firebase/firebase'
 import { collection, onSnapshot, setDoc, doc, deleteDoc } from 'firebase/firestore'
 
-const notesFromDb = []
-
 export default defineStore('notesArr', {
   state: () => {
     return {
@@ -14,8 +12,9 @@ export default defineStore('notesArr', {
   actions: {
     async getNotes() {
       onSnapshot(collection(db, 'notes'), (documentsFromDb) => {
+        this.notes = ref([])
         documentsFromDb.forEach(doc => {
-          notesFromDb.unshift({
+          this.notes.unshift({
             id: doc.id,
             value: doc.data().value,
             edited: false,
@@ -25,28 +24,28 @@ export default defineStore('notesArr', {
             minute: doc.data().minute,
             hour: doc.data().hour
           })
-          let idFoundFlag = false
-          for (let note of this.notes) {
-            if (note.id === doc.id) {
-              idFoundFlag = true
-              if (note.value !== doc.data().value) {
-                note.value = doc.data().value
-                break
-              }
-            }
-          }
-          if (!idFoundFlag) {
-            this.notes.unshift({
-              id: doc.id,
-              value: doc.data().value,
-              edited: false,
-              date: doc.data().date,
-              month: doc.data().month,
-              year: doc.data().year,
-              minute: doc.data().minute,
-              hour: doc.data().hour
-            })
-          }
+          // let idFoundFlag = false
+          // for (let note of this.notes) {
+          //   if (note.id === doc.id) {
+          //     idFoundFlag = true
+          //     if (note.value !== doc.data().value) {
+          //       note.value = doc.data().value
+          //       break
+          //     }
+          //   }
+          // }
+          // if (!idFoundFlag) {
+          //   this.notes.unshift({
+          //     id: doc.id,
+          //     value: doc.data().value,
+          //     edited: false,
+          //     date: doc.data().date,
+          //     month: doc.data().month,
+          //     year: doc.data().year,
+          //     minute: doc.data().minute,
+          //     hour: doc.data().hour
+          //   })
+          // }
         })
       })
     },
@@ -64,8 +63,11 @@ export default defineStore('notesArr', {
       })
     },
     async deleteNote(indToBeRemoved) {
-      await deleteDoc(doc(db, "notes", this.notes[indToBeRemoved].id))
-      this.notes.splice(indToBeRemoved, 1)
+      await deleteDoc(doc(db, "notes", this.notes[indToBeRemoved].id)).finally(() => {
+        // this.notes.splice(indToBeRemoved, 1)
+        this.notes = ref([])
+        this.getNotes()
+      })
     },
     findIndById(id) {
       for (let ind in this.notes) {
