@@ -72,12 +72,9 @@
     margin: auto;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 500px){
     body{
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-    .mainDisplay{
-      border-top-color: transparent;
     }
   }
 </style>

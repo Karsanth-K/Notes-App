@@ -6,6 +6,7 @@ import { collection, onSnapshot, setDoc, doc, deleteDoc } from 'firebase/firesto
 export default defineStore('notesArr', {
   state: () => {
     return {
+      loadingNotes: true,
       notes: ref([])
     }
   },
@@ -26,6 +27,7 @@ export default defineStore('notesArr', {
           })
         })
         this.notes = notes
+        this.loadingNotes = false
       })
     },
     async addNote(val) {
@@ -58,7 +60,6 @@ export default defineStore('notesArr', {
     },
     async editNote(id, val) {
       const ind = this.findIndById(id)
-      this.notes[ind].edited = true
       this.notes[ind].date =  new Date().getDate().toString()
       this.notes[ind].month =  new Date().getMonth().toString()
       this.notes[ind].year =  new Date().getFullYear().toString()
@@ -77,7 +78,6 @@ export default defineStore('notesArr', {
       })
     },
     async setEditedToFalse(id) {
-      console.log("setEditedToFalse")
       const ind = this.findIndById(id)
       this.notes[ind].edited = false
       await setDoc(doc(db, "notes", id), {

@@ -1,16 +1,18 @@
 <template>
   <div class="notes">
-    <!-- <div class="saveChangesDiv">
-      <button class="button" :disabled="!notesStore.saveChangesEnabled" @click="checkForSaveEnabled">Save Changes</button>
-    </div> -->
     <NotesInput />
-    <div id="notesDiv">
+    <button v-if="notesStore.loadingNotes" class="button is-link is-loading">Loading...</button>
+    <div v-else id="notesDiv">
       <Note
         v-for="(note) in notesStore.notes"
         :key="note.id"
         :note="note"
       />
     </div>
+    <label for="addNoteInput" v-if="!notesStore.notes.length" class="no-notes">
+      <h1 class="title">It's blank...</h1>
+      <h2 class="subtitle">No notes found.. &nbsp; Add a note to get started !</h2>
+    </label>
   </div>
 </template>
 
@@ -46,11 +48,27 @@
   .notes{
     scroll-behavior: smooth;
   }
-  .saveChangesDiv{
+  .is-loading{
+    background: transparent;
+    position: relative;
+    left: 50%;
+    translate: -50%;
+  }
+  .no-notes{
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 50px;
+    min-width: fit-content;
+    max-width: 600px;
+    padding: 50px;
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    margin-right: 20px;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .no-notes>*{
+    width: fit-content;
+    color: #606060;
   }
   button{
     background-color: #4f4ff4;

@@ -63,7 +63,6 @@
     }
   })
   if (edited.value) {
-    console.log('yess')
     //scroll to the element
     setTimeout(() => {
       cardDivRef.value.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
