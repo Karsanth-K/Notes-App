@@ -17,7 +17,7 @@ export default defineStore('notesArr', {
           this.notes.unshift({
             id: doc.id,
             value: doc.data().value,
-            edited: false,
+            edited: doc.data().edited,
             date: doc.data().date,
             month: doc.data().month,
             year: doc.data().year,
@@ -93,12 +93,16 @@ export default defineStore('notesArr', {
         year: new Date().getFullYear().toString(),
         minute: new Date().getMinutes().toString(),
         hour: new Date().getHours().toString(),
-        edited: false
+        edited: true
       })
     },
-    setEditedToFalse(id) {
+    async setEditedToFalse(id) {
       const ind = this.findIndById(id)
       this.notes[ind].edited = false
+      await setDoc(doc(db, "notes", id), {
+        ...this.notes[ind],
+        edited: false
+      })
     }
   },
   getters:{
