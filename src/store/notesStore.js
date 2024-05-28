@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { db } from '@/firebase/firebase'
 import { collection, onSnapshot, setDoc, doc, deleteDoc } from 'firebase/firestore'
 
@@ -12,9 +12,9 @@ export default defineStore('notesArr', {
   actions: {
     async getNotes() {
       onSnapshot(collection(db, 'notes'), (documentsFromDb) => {
-        this.notes = ref([])
+        const notes = []
         documentsFromDb.forEach(doc => {
-          this.notes.unshift({
+          notes.unshift({
             id: doc.id,
             value: doc.data().value,
             edited: doc.data().edited,
@@ -24,29 +24,8 @@ export default defineStore('notesArr', {
             minute: doc.data().minute,
             hour: doc.data().hour
           })
-          // let idFoundFlag = false
-          // for (let note of this.notes) {
-          //   if (note.id === doc.id) {
-          //     idFoundFlag = true
-          //     if (note.value !== doc.data().value) {
-          //       note.value = doc.data().value
-          //       break
-          //     }
-          //   }
-          // }
-          // if (!idFoundFlag) {
-          //   this.notes.unshift({
-          //     id: doc.id,
-          //     value: doc.data().value,
-          //     edited: false,
-          //     date: doc.data().date,
-          //     month: doc.data().month,
-          //     year: doc.data().year,
-          //     minute: doc.data().minute,
-          //     hour: doc.data().hour
-          //   })
-          // }
         })
+        this.notes = notes
       })
     },
     async addNote(val) {
@@ -54,18 +33,18 @@ export default defineStore('notesArr', {
         return
       const id = new Date().getTime().toString()
       await setDoc(doc(db, "notes", id), {
+        id: id,
         value: val,
         date: new Date().getDate().toString(),
         month: new Date().getMonth().toString(),
         year: new Date().getFullYear().toString(),
         minute: new Date().getMinutes().toString(),
         hour: new Date().getHours().toString(),
+        edited: false
       })
     },
     async deleteNote(indToBeRemoved) {
       await deleteDoc(doc(db, "notes", this.notes[indToBeRemoved].id)).finally(() => {
-        // this.notes.splice(indToBeRemoved, 1)
-        this.notes = ref([])
         this.getNotes()
       })
     },
@@ -87,6 +66,7 @@ export default defineStore('notesArr', {
       this.notes[ind].hour = new Date().getHours().toString()
       this.notes[ind].value = val
       await setDoc(doc(db, "notes", id), {
+        id: id,
         value: val,
         date: new Date().getDate().toString(),
         month: new Date().getMonth().toString(),
@@ -97,6 +77,7 @@ export default defineStore('notesArr', {
       })
     },
     async setEditedToFalse(id) {
+      console.log("setEditedToFalse")
       const ind = this.findIndById(id)
       this.notes[ind].edited = false
       await setDoc(doc(db, "notes", id), {

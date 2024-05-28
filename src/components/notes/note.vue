@@ -22,7 +22,7 @@
 
   //imports
   import useNotesStore from '@/store/notesStore'
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, onUpdated, watch } from 'vue';
 
   //use notes store
   const notesStore = useNotesStore()
@@ -48,7 +48,8 @@
   const cardDivRef = ref(null)
 
   //on changes to the states
-  onMounted(() => {
+  onUpdated(() => {
+    edited.value = notesStore.notes[notesStore.findIndById(props.note.id)].edited
     if (edited.value) {
       //scroll to the element
       setTimeout(() => {
@@ -61,6 +62,18 @@
       }, 1000);
     }
   })
+  if (edited.value) {
+    console.log('yess')
+    //scroll to the element
+    setTimeout(() => {
+      cardDivRef.value.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+    }, 0);
+    //remove 'edited' value which further removes 'edited' class
+    setTimeout(() => {
+      notesStore.setEditedToFalse(props.note.id)
+      edited.value = false
+    }, 1000);
+  }
   
   //handle edit note
   const handleEditNote = () => {
