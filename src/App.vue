@@ -39,7 +39,7 @@
     box-shadow: none;
     border: 1px solid #3e3e47;
     background-color: rgb(24, 24, 24);
-    max-width: 750px;
+    max-width: 600px;
     position: relative;
     left: 50%;
     translate: -50%;
@@ -64,9 +64,10 @@
   }
 
   .mainDisplay {
-    padding: 50px;
+    padding: 20px;
     padding-top: 5px;
     border-radius: 20px;
+    min-width: fit-content;
     max-width: 850px;
     margin: auto;
   }

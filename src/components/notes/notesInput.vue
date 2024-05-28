@@ -7,7 +7,7 @@
       class="textarea"
       placeholder="Write a note..."
       ref="newNoteRef"
-      v-autofocus
+      :autofocus="!isMobileDisplay"
     />
     <footer class="card-footer">
       <button
@@ -20,9 +20,17 @@
 </template>
 <script setup>
   //imports
-  import { ref,computed } from 'vue'
+  import { ref,computed,onUnmounted } from 'vue'
   import useNotesStore from '@/store/notesStore'
-  import vAutofocus from '@/directives/autofocus'
+
+  //check for mobile display
+  const isMobileDisplay = ref(window.innerWidth < 500)
+
+  const checkMobileDisplay = () => {
+    isMobileDisplay.value = window.innerWidth < 500
+  }
+
+  window.addEventListener('resize', checkMobileDisplay)
 
   //notes store
   const notesStore = useNotesStore()
@@ -39,6 +47,11 @@
     if (length === 1)
       return `${length} Charater`
     return `${length} Charaters`
+  })
+
+//remove event listeners
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobileDisplay)
   })
   
 </script>
@@ -59,7 +72,7 @@
     display: none;
   }
   .inputField{
-    max-width: 750px;
+    max-width: 600px;
     background-color: rgb(24, 24, 24);
     position: relative;
     left: 50%;

@@ -82,9 +82,10 @@
     left: -5px;
   }
   .signupDiv{
-     width: 350px;
+     min-width: fit-content;
+     max-width: 400px;
      height: 415px;
-     background-color: #1f1f1f;
+     background-color: #191919;
      border-radius: 10px;
      margin: auto;
      margin-top: 100px;

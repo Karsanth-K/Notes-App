@@ -72,9 +72,10 @@
     translate: -50% 130%;
   }
   .loginDiv{
-     width: 350px;
+     min-width: fit-content;
+     max-width: 400px;
      height: 375px;
-     background-color: #252525;
+     background: #191919;
      border-radius: 10px;
      margin: auto;
      margin-top: 100px;
