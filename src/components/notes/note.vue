@@ -156,5 +156,6 @@
   }
   pre{
     background-color: transparent; 
+    margin-bittom: 0;
   }
 </style>
