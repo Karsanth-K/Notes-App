@@ -126,7 +126,7 @@
     opacity: 1;
   }
   .content{
-    text-align: justify;
+    margin-bottom: -30px;
   }
   .dateDiv{
     display: flex;
@@ -155,7 +155,6 @@
     box-shadow: 0 0 5px #f55;
   }
   pre{
-    background-color: transparent; 
-    margin-bittom: -30px;
+    background-color: transparent;
   }
 </style>
