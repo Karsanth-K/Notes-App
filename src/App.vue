@@ -77,7 +77,7 @@
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
     .card{
-      max-width: 500px;
+      max-width: 400px;
     }
   }
 </style>
