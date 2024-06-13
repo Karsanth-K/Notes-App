@@ -153,6 +153,7 @@
   }
   pre{
     background-color: transparent;
+    max-width: 90%;
     margin-bottom: -60px;
   }
 </style>
