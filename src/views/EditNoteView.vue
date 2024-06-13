@@ -12,7 +12,7 @@
     />
     <footer class="card-footer">
       <button
-        @click="notesStore.editNote(id, noteStrVal), $router.back()"
+        @click="if(notesStore.editNote(id, noteStrVal)){$router.back()}"
         class="card-footer-item">
           Confirm
       </button>
