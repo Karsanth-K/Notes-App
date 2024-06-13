@@ -125,9 +125,6 @@
     z-index: 1;
     opacity: 1;
   }
-  .content{
-    margin-bottom: -30px;
-  }
   .dateDiv{
     display: flex;
     gap: 20px;
@@ -156,5 +153,6 @@
   }
   pre{
     background-color: transparent;
+    margin-bottom: -60px;
   }
 </style>
