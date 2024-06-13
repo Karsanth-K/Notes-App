@@ -59,7 +59,7 @@ export default defineStore('notesArr', {
       return -1
     },
     async editNote(id, val) {
-      if(!val) return 0
+      if(!val) return
       const ind = this.findIndById(id)
       this.notes[ind].date =  new Date().getDate().toString()
       this.notes[ind].month =  new Date().getMonth().toString()
@@ -77,7 +77,6 @@ export default defineStore('notesArr', {
         hour: new Date().getHours().toString(),
         edited: true
       })
-      return 1
     },
     async setEditedToFalse(id) {
       const ind = this.findIndById(id)
