@@ -12,7 +12,7 @@
     />
     <footer class="card-footer">
       <button
-        @click="editNote"
+        @click="notesStore.editNote(id, noteStrVal), $router.replace('/notes')"
         class="card-footer-item">
           Confirm
       </button>
@@ -53,13 +53,6 @@
 
   //edit note
   const noteStrVal = ref(note.value.value)
-
-  // edit functionality
-  function editNote(){
-      if(notesStore.editNote(id, noteStrVal)){
-        router.back()
-      }
-  }
       
   //computed
   const computedNoOfChar = computed(() => {
