@@ -27,12 +27,13 @@
 <script setup>
   //imports
   import useNotesStore from '@/store/notesStore'
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { ref, computed, onMounted, onUnmounted } from 'vue';
   import vAutofocus from '@/directives/autofocus'
 
   //initiating router
   const route = useRoute()
+  const router = useRouter()
   
   //notes store
   const notesStore = useNotesStore()
@@ -56,7 +57,7 @@
   // edit functionality
   function editNote(){
       if(notesStore.editNote(id, noteStrVal)){
-        $router.back()
+        router.back()
       }
   }
       
