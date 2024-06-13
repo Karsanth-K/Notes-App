@@ -154,4 +154,7 @@
   .card-footer>.confirm-delete:hover {
     box-shadow: 0 0 5px #f55;
   }
+  pre{
+    background-color: transparent; 
+  }
 </style>
