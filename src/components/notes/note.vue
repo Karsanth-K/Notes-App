@@ -3,7 +3,7 @@
     <div class="editedDisplay">Edited</div>
     <div class="card-content">
       <div class="content">
-        <div>{{ note.value }}</div><br/>
+        <pre>{{ note.value }}</pre><br/>
         <div class="dateDiv">
           <div class="date">{{date}}</div>
           <div class="time">{{time}}</div>
