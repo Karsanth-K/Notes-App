@@ -31,7 +31,7 @@ export default defineStore('notesArr', {
         // bubble sorting notes based on the date and time
         for(let i=0;i<notes.length;i++){
           for(let j=i+1; j<notes.length;j++){
-            if(this.getDateAndTime(notes[i]) < this.getDateAndTime(notes[j])){
+            if(parseInt(this.getDateAndTime(notes[i])) < parseInt(this.getDateAndTime(notes[j]))){
               let temp = notes[i]
               notes[i] = notes[j]
               notes[j] = temp
@@ -111,7 +111,7 @@ export default defineStore('notesArr', {
       const hour = note.hour.length === 1 ? '0' + note.hour : note.hour
       // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
       const timeData = year+month+date+hour+minute+second
-      return parseInt(timeData)
+      return timeData
     }
   },
   getters:{
