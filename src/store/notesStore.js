@@ -26,9 +26,10 @@ export default defineStore('notesArr', {
             hour: doc.data().hour
           })
         })
-        this.notes = notes.sort((first, second)=>{
-          this.getDateAndTime(first) - this.getDateAndTime(second)
-        })
+        for(let note of notes){
+          console.log(note, ' => ', this.getTimeAndDate(note))
+        }
+        this.notes = notes
         this.loadingNotes = false
       })
     },
