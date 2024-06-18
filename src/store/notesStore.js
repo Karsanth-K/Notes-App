@@ -109,7 +109,7 @@ export default defineStore('notesArr', {
       const minute = note.minute.length === 1 ? '0' + note.minute : note.minute
       // const ampm = note.hour>'12'? 'PM':'AM'
       // const hour = note.hour>'12'? (note.hour-'12').toString(): note.hour
-      const second = note.second.length === 1 ? '0' + note.second : note.second
+      const second = (note.second)?(note.second.length === 1 ? '0' + note.second : note.second):('00')
       const hour = note.hour.length === 1 ? '0' + note.hour : note.hour
       // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
       const timeData = year+month+date+hour+minute+second
