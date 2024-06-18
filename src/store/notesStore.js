@@ -24,7 +24,7 @@ export default defineStore('notesArr', {
             year: doc.data().year,
             minute: doc.data().minute,
             hour: doc.data().hour,
-            second: doc.data().second,
+            second: (doc.data().second)?('00'):(doc.data().second),
           })
         })
         
@@ -79,6 +79,7 @@ export default defineStore('notesArr', {
       this.notes[ind].month =  new Date().getMonth().toString()
       this.notes[ind].year =  new Date().getFullYear().toString()
       this.notes[ind].minute =  new Date().getMinutes().toString()
+      this.notes[ind].second = new Date().getSeconds().toString()
       this.notes[ind].hour = new Date().getHours().toString()
       this.notes[ind].value = val
       await setDoc(doc(db, "notes", id), {
@@ -89,6 +90,7 @@ export default defineStore('notesArr', {
         year: new Date().getFullYear().toString(),
         minute: new Date().getMinutes().toString(),
         hour: new Date().getHours().toString(),
+        second: new Date().getSeconds().toString(),
         edited: true
       })
     },
