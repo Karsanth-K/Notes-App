@@ -98,7 +98,7 @@ export default defineStore('notesArr', {
       const hour = note.hour.lenhth === 1 ? '0' + note.hour : note.hour
       // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
       const timeData = year+month+date+hour+minute
-      return timeData.toNumber()
+      return parseInt(timeData)
     }
   },
   getters:{
