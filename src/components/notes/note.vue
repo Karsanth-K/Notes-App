@@ -35,11 +35,25 @@
     }
   })
   // get date
-  const date = `${props.note.date.length===1?'0'+props.note.date:props.note.date} / ${props.note.month.length===1?'0'+props.note.month:props.note.month} / ${props.note.year}`
-  const minute = props.note.minute.length === 1 ? '0' + props.note.minute : props.note.minute
-  const ampm = props.note.hour>'12'? 'PM':'AM'
-  const hour = props.note.hour>'12'? (props.note.hour-'12').toString(): props.note.hour
-  const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
+  // const date = `${props.note.date.length===1?'0'+props.note.date:props.note.date} / ${props.note.month.length===1?'0'+props.note.month:props.note.month} / ${props.note.year}`
+  // const minute = props.note.minute.length === 1 ? '0' + props.note.minute : props.note.minute
+  // const ampm = props.note.hour>'12'? 'PM':'AM'
+  // const hour = props.note.hour>'12'? (props.note.hour-'12').toString(): props.note.hour
+  // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
+  const timeData = notesStore.getDateAndTime(props.note)  //yyyymmddhhmmss
+  const date = `${timeData.substring(6,8)} / ${timeData.substring(4,6)} / ${timeData.substring(0,4)}`
+  let hour, ampm
+  if(parseInt(timeData.substring(8,10)) > 12){
+    hour = (parseInt(timeData.substring(8,10))-12).toString()
+  }else{
+    hour = timeData.substring(8,10)
+  }
+  if(parseInt(timeData.substring(8,10)) > 12){
+    ampm = 'AM'
+  }else{
+    ampm = 'PM'
+  }
+  const time = `${hour}:${timeData.substring(10,12)} ${AMPM}`
 
   //set edited
   const edited = ref(props.note.edited)
