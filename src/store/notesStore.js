@@ -27,7 +27,16 @@ export default defineStore('notesArr', {
           })
         })
         
-        console.log(this.getDateAndTime(notes[0])>this.getDateAndTime(notes[1]))
+        // console.log(this.getDateAndTime(notes[0])>this.getDateAndTime(notes[1]))
+        for(let i=0;i<notes.length;i++){
+          for(let j=i+1; j<notes.length;j++){
+            if(this.getDateAndTime(notes[i]) > this.getDateAndTime(notes[j])){
+              let temp = notes[i]
+              notes[i] = notes[j]
+              notes[j] = temp
+            }
+          }
+        }
         
         this.notes = notes
         this.loadingNotes = false
