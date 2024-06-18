@@ -26,10 +26,9 @@ export default defineStore('notesArr', {
             hour: doc.data().hour
           })
         })
-        for(let note of notes){
-          console.log(note, ' => ', this.getDateAndTime(note))
-        }
-        this.notes = notes
+        this.notes = notes.sort((a, b)=>{
+          this.getDateAndTime(a) - this.getDateAndTime(b)
+        })
         this.loadingNotes = false
       })
     },
@@ -98,8 +97,8 @@ export default defineStore('notesArr', {
       // const hour = note.hour>'12'? (note.hour-'12').toString(): note.hour
       const hour = note.hour.lenhth === 1 ? '0' + note.hour : note.hour
       // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
-      const timeData = minute+hour+date+month+year
-      return timeData
+      const timeData = year+month+date+hour+minute
+      return timeData.toNumber()
     }
   },
   getters:{
