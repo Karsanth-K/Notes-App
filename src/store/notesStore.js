@@ -26,9 +26,9 @@ export default defineStore('notesArr', {
             hour: doc.data().hour
           })
         })
-        for(let note of notes){
-          console.log(this.getDateAndTime(note))
-        }
+        
+        console.log(this.getDateAndTime(notes[0])>this.getDateAndTime(notes[1]))
+        
         this.notes = notes
         this.loadingNotes = false
       })
