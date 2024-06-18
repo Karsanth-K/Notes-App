@@ -53,7 +53,7 @@
   }else{
     ampm = 'PM'
   }
-  const time = `${hour}:${timeData.substring(10,12)} ${AMPM}`
+  const time = `${hour}:${timeData.substring(10,12)} ${ampm}`
 
   //set edited
   const edited = ref(props.note.edited)
