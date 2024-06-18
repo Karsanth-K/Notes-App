@@ -27,7 +27,7 @@ export default defineStore('notesArr', {
           })
         })
         for(let note of notes){
-          console.log(note, ' => ', this.getTimeAndDate(note))
+          console.log(note, ' => ', this.getDateAndTime(note))
         }
         this.notes = notes
         this.loadingNotes = false
