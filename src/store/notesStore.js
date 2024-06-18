@@ -24,7 +24,7 @@ export default defineStore('notesArr', {
             year: doc.data().year,
             minute: doc.data().minute,
             hour: doc.data().hour,
-            second: (doc.data().second)?('00'):(doc.data().second),
+            second: doc.data().second,
           })
         })
         
