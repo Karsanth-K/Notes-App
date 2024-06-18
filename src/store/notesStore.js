@@ -23,11 +23,12 @@ export default defineStore('notesArr', {
             month: doc.data().month,
             year: doc.data().year,
             minute: doc.data().minute,
-            hour: doc.data().hour
+            hour: doc.data().hour,
+            second: doc.data().second,
           })
         })
         
-        // console.log(this.getDateAndTime(notes[0])>this.getDateAndTime(notes[1]))
+        // bubble sorting notes based on the date and time
         for(let i=0;i<notes.length;i++){
           for(let j=i+1; j<notes.length;j++){
             if(this.getDateAndTime(notes[i]) < this.getDateAndTime(notes[j])){
@@ -52,6 +53,7 @@ export default defineStore('notesArr', {
         date: new Date().getDate().toString(),
         month: new Date().getMonth().toString(),
         year: new Date().getFullYear().toString(),
+        second: new Date().getSeconds().toString(),
         minute: new Date().getMinutes().toString(),
         hour: new Date().getHours().toString(),
         edited: false
@@ -105,9 +107,10 @@ export default defineStore('notesArr', {
       const minute = note.minute.length === 1 ? '0' + note.minute : note.minute
       // const ampm = note.hour>'12'? 'PM':'AM'
       // const hour = note.hour>'12'? (note.hour-'12').toString(): note.hour
-      const hour = note.hour.lenhth === 1 ? '0' + note.hour : note.hour
+      const second = note.second.length === 1 ? '0' + note.second : note.second
+      const hour = note.hour.length === 1 ? '0' + note.hour : note.hour
       // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
-      const timeData = year+month+date+hour+minute
+      const timeData = year+month+date+hour+minute+second
       return parseInt(timeData)
     }
   },
