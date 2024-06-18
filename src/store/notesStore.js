@@ -74,14 +74,14 @@ export default defineStore('notesArr', {
     },
     async editNote(id, val) {
       if(!val) return
-      const ind = this.findIndById(id)
-      this.notes[ind].date =  new Date().getDate().toString()
-      this.notes[ind].month =  new Date().getMonth().toString()
-      this.notes[ind].year =  new Date().getFullYear().toString()
-      this.notes[ind].minute =  new Date().getMinutes().toString()
-      this.notes[ind].second = new Date().getSeconds().toString()
-      this.notes[ind].hour = new Date().getHours().toString()
-      this.notes[ind].value = val
+      // const ind = this.findIndById(id)
+      // this.notes[ind].date =  new Date().getDate().toString()
+      // this.notes[ind].month =  new Date().getMonth().toString()
+      // this.notes[ind].year =  new Date().getFullYear().toString()
+      // this.notes[ind].minute =  new Date().getMinutes().toString()
+      // this.notes[ind].second = new Date().getSeconds().toString()
+      // this.notes[ind].hour = new Date().getHours().toString()
+      // this.notes[ind].value = val
       await setDoc(doc(db, "notes", id), {
         id: id,
         value: val,
