@@ -87,19 +87,19 @@ export default defineStore('notesArr', {
         ...this.notes[ind],
         edited: false
       })
+    },
+    getDateAndTime(note){
+      const date = note.date.length===1?'0'+note.date:note.date 
+      const month = note.month.length===1?'0'+note.month:note.month
+      const year = note.year 
+      const minute = note.minute.length === 1 ? '0' + note.minute : note.minute
+      // const ampm = note.hour>'12'? 'PM':'AM'
+      // const hour = note.hour>'12'? (note.hour-'12').toString(): note.hour
+      const hour = note.hour.lenhth === 1 ? '0' + note.hour : note.hour
+      // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
+      const timeData = minute+hour+date+month+year
+      return timeData
     }
-  },
-  getDateAndTime(note){
-    const date = note.date.length===1?'0'+note.date:note.date 
-    const month = note.month.length===1?'0'+note.month:note.month
-    const year = note.year 
-    const minute = note.minute.length === 1 ? '0' + note.minute : note.minute
-    // const ampm = note.hour>'12'? 'PM':'AM'
-    // const hour = note.hour>'12'? (note.hour-'12').toString(): note.hour
-    const hour = note.hour.lenhth === 1 ? '0' + note.hour : note.hour
-    // const time = `${hour.length===1?'0'+hour:hour}:${minute} ${ampm}`
-    const timeData = minute+hour+date+month+year
-    return timeData
   },
   getters:{
     getNumOfNotes: (state) => {
